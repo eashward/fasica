@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -62,11 +60,9 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # enable logging
-  config.logger = Logger.new(STDOUT)
-  # config.log_formatter = ::Logger::Formatter.new
-  # logger           = ActiveSupport::Logger.new(STDOUT)
-  # logger.formatter = config.log_formatter
-  # config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
 
   # set default url options
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }

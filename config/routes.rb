@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users do
-    resources :amps, only: %i[index show]
-  end
+  get 'users/:id/amps', to: 'amps#index'
+  get 'users/:id/amps/:id', to: 'amps#show'
+
 end

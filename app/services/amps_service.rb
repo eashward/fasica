@@ -7,6 +7,10 @@ class AmpsService < BaseService
     cisco_client.amps
   end
 
+  def by_connector_guid(uuid:)
+    cisco_client.amps_by_connector_guid(uuid: uuid)
+  end
+
   def dump_amp
     amps = fetch_amp
     amps['data'].each_slice(100) do |chunk|

@@ -3,23 +3,24 @@
 module ApiClient
   class Base
     attr_accessor :service_uri, :timeout, :base_path, :headers, :parameters, :api_version_uri
-    delegate :get, :post, :put, :patch, :delete, to: :connection
+    # delegate :get, :post, :put, :patch, :delete, to: :connection
 
     DEFAULT_TIMEOUT_IN_SECONDS = 3
 
     def initialize(service_uri:,
-                   base_path: '/',
                    headers: {},
                    parameters: {},
                    timeout: DEFAULT_TIMEOUT_IN_SECONDS)
       @timeout = timeout
       @service_uri = service_uri
-      @base_path = base_path
       @headers = default_headers.merge(headers)
       @parameters = parameters
     end
 
-    def connection
+    def connection(
+        base_path: '/'
+      )
+      @base_path = base_path
       @connection ||= new_Connection(uri: api_version_uri)
     end
 
@@ -36,10 +37,26 @@ module ApiClient
       }
     end
 
+    def parse_response(response)
+      JSON.parse(response.body)
+    end
+
+    def handle_response(response)
+      if response.success?
+        parse_response(response)
+      else
+        handle_error(response)
+      end
+    end
+
+    def handle_error(response)
+      error = { status: response.status, msg: response.body.inspect }
+      raise error
+    end
+
     private
 
     def new_Connection(uri:)
-      byebug
       Faraday.new(url: uri) do |faraday|
         faraday.request :url_encoded
         faraday.options[:timeout] = timeout

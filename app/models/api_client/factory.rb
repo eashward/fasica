@@ -8,10 +8,8 @@ module ApiClient
 
     def cisco(user)
       byebug
-      #: TODO store user_name and password in db and restrict access for admin ?
       @amps ||= ApiClient::Cisco.new(
-        service_uri: "https://#{user.api_client_id}:#{user.api_key}@api.amp.cisco.com",
-        base_path: '/v1/computers'
+        service_uri: "https://#{user.api_client_id}:#{user.api_key}@api.amp.cisco.com"
         # headers: auth_token_header(user)
       )
     rescue StandardError => e

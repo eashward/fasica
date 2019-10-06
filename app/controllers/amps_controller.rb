@@ -5,7 +5,7 @@ class AmpsController < ApplicationController
 
   def index
     response = current_user.amps
-    @amps = parse_response(response).to_json
+    @amps = parse_response(response)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,6 +18,6 @@ class AmpsController < ApplicationController
   def show; end
 
   def parse_response(response)
-    response.pluck(:event_data).to_json
+    response.pluck(:event_data)
   end
 end

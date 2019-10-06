@@ -11,6 +11,26 @@ module ApiClient
       parse_response(response)
     end
 
+    def get_2
+
+    end
+    def get_3
+
+    end
+
+    def get_6
+
+    end
+
+    def get_4
+
+    end
+
+    def get_5
+
+    end
+
+
     def parse_response(response)
       JSON.parse(response.body)
     end

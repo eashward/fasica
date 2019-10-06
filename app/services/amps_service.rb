@@ -15,8 +15,18 @@ class AmpsService < BaseService
     amps = fetch_amp
     amps['data'].each_slice(100) do |chunk|
       chunk.each do |amp|
-        user.amps.create(event_data: amp).save!
+        user.amps.new(event_data: amp).save!
       end
+    end
+  rescue StandardError => e
+    e
+  end
+
+  def dump_amps_by_cnctr_guid
+    amps = user.amps.map { |amp| amp[:event_data] }
+    guids = amps.map { |data| data['connector_guid'] }
+    by_connector_guid(uuid: guids.last).tap do |amp|
+      user.amps.new(event_data: amp).save!
     end
   rescue StandardError => e
     e

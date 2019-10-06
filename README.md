@@ -4,7 +4,7 @@
 * dump_amps_by_guid -> Makes live call to Cisco API v1/computers/:connector_guid and dumps data to amps table
 * Services (job queues, cache servers, search engines, etc.)
 * Scheduler runs rake task `dump_amps` every 10 hours.
-* Scheduler runs rake task `dump_amps_by_guid` every 10 hours.
+* Scheduler runs rake task `dump_amps_by_guid` every 5 hours.
 
 
 * spin up rails server and add admin user

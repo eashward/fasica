@@ -7,5 +7,5 @@ end
 
 # schedule AMP dumps by guid for every 5 hours
 every 5.hours do
-  rake 'dump_amps'
+  rake 'dump_amps_by_guid'
 end

@@ -9,4 +9,4 @@
 
 * spin up rails server and add admin user
 * `client_id` and `key` should be inserted manually via `rails c` to access API
-* client_id and `key` are encrypted and saved in db
+* `client_id` and `key` will be encrypted before commiting to db.
